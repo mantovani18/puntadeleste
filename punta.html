@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Viagem para Punta 🍺🤪</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff3d6; --ink:#1d2b3a; --muted:#5b6b7a; --card:#ffffff; --accent:#f2a10f; --foam:#ffffff; --coral:#ef5b4c; --line:#1d2b3a22;
+  color-scheme: light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#10202c; --ink:#fff3d6; --muted:#a9b8c4; --card:#18303f; --accent:#f7b733; --foam:#fff3d6; --coral:#ff7a6b; --line:#fff3d622;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#10202c; --ink:#fff3d6; --muted:#a9b8c4; --card:#18303f; --accent:#f7b733; --foam:#fff3d6; --coral:#ff7a6b; --line:#fff3d622;
+  color-scheme: dark;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{
+  margin:0; min-height:100vh; background:var(--bg); color:var(--ink);
+  font-family:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  display:flex; align-items:center; justify-content:center; padding:24px 16px;
+}
+main{width:100%; max-width:560px; text-align:center}
+.emoji{font-size:2.4rem; letter-spacing:.2em}
+h1{font-size:clamp(2rem,9vw,3.4rem); line-height:1.05; margin:.4rem 0 .3rem; font-weight:800}
+.sub{color:var(--muted); font-size:1.05rem; margin:0 0 1.6rem}
+.timer{display:grid; grid-template-columns:repeat(4,1fr); gap:10px}
+.box{background:var(--card); border:2px solid var(--line); border-radius:18px; padding:16px 4px 12px}
+.num{display:block; font-size:clamp(2.2rem,12vw,3.6rem); font-weight:800; font-variant-numeric:tabular-nums; line-height:1; color:var(--ink)}
+.lbl{display:block; margin-top:6px; font-size:.85rem; color:var(--muted)}
+.box.sec .num{color:var(--coral)}
+.beer{width:300px; max-width:88vw; margin:1.2rem auto 0}
+.beer svg{display:block; width:100%; height:auto; overflow:visible}
+.b{transform-box:fill-box}
+@media (prefers-reduced-motion: no-preference){
+  .b{animation:rise 4s linear infinite}
+  @keyframes rise{0%{transform:translateY(0);opacity:0} 10%{opacity:.8} 100%{transform:translateY(-170px);opacity:.15}}
+  .flow{stroke-dasharray:7 9; animation:flow .45s linear infinite}
+  @keyframes flow{to{stroke-dashoffset:-16}}
+}
+.hint{margin-top:.6rem; font-size:.9rem; color:var(--muted)}
+.go{display:none}
+body.done .timer,body.done .sub{display:none}
+body.done .go{display:block}
+.go .big{font-size:clamp(3rem,18vw,6rem); font-weight:800; color:var(--coral); line-height:1}
+.go p{font-size:1.2rem; margin:.8rem 0 0}
+@media (prefers-reduced-motion: no-preference){
+  body.done .go .big{animation:pulse 1s ease-in-out infinite alternate}
+  @keyframes pulse{to{transform:scale(1.08) rotate(-2deg)}}
+}
+</style>
+</head>
+<body>
+<main>
+  <div class="emoji" aria-hidden="true">🍺🤪</div>
+  <h1>Viagem para Punta</h1>
+  <p class="sub">Saída amanhã às 9h da manhã</p>
+
+  <section class="timer" aria-live="off" aria-label="Contagem regressiva">
+    <div class="box"><span class="num" id="d">00</span><span class="lbl">dias</span></div>
+    <div class="box"><span class="num" id="h">00</span><span class="lbl">horas</span></div>
+    <div class="box"><span class="num" id="m">00</span><span class="lbl">minutos</span></div>
+    <div class="box sec"><span class="num" id="s">00</span><span class="lbl">segundos</span></div>
+  </section>
+
+  <div class="beer" aria-hidden="true">
+    <svg viewBox="0 0 300 356" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="beerG" gradientUnits="userSpaceOnUse" x1="0" y1="22" x2="0" y2="222">
+          <stop offset="0" stop-color="#ffd24d"/>
+          <stop offset=".55" stop-color="#f0a010"/>
+          <stop offset="1" stop-color="#c97a00"/>
+        </linearGradient>
+        <linearGradient id="beerS" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#000" stop-opacity=".12"/>
+          <stop offset=".25" stop-color="#fff" stop-opacity=".18"/>
+          <stop offset="1" stop-color="#000" stop-opacity=".18"/>
+        </linearGradient>
+        <linearGradient id="bottleG" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#3b1c06"/>
+          <stop offset=".35" stop-color="#8c4c14"/>
+          <stop offset=".7" stop-color="#6a3510"/>
+          <stop offset="1" stop-color="#2f1604"/>
+        </linearGradient>
+        <clipPath id="inner"><path d="M36 0 H144 L139 216 Q138 222 132 222 H48 Q42 222 41 216 Z"/></clipPath>
+        <clipPath id="lc"><rect id="lcr" x="30" y="226" width="120" height="0"/></clipPath>
+        <clipPath id="bclip"><path d="M-6 2 L-6 38 C-6 54 -21 60 -21 84 L-21 176 Q-21 186 -11 186 H11 Q21 186 21 176 L21 84 C21 60 6 54 6 38 L6 2 Z"/></clipPath>
+      </defs>
+
+      <!-- caneca de chope -->
+      <g transform="translate(113,146) scale(.8)">
+        <ellipse cx="90" cy="246" rx="66" ry="5" fill="var(--ink)" opacity=".15"/>
+
+        <path d="M151 58 C210 48 208 170 146 176" fill="none" stroke="var(--ink)" stroke-width="15" stroke-linecap="round"/>
+        <path d="M151 58 C210 48 208 170 146 176" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="8" stroke-linecap="round"/>
+        <path d="M158 66 C192 62 192 156 152 164" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="2" stroke-linecap="round"/>
+
+        <path d="M28 18 H152 L146 226 Q145 238 133 238 H47 Q35 238 34 226 Z" fill="var(--card)" fill-opacity=".55"/>
+        <path d="M41 222 H139 L137 236 H43 Z" fill="#fff" fill-opacity=".4"/>
+
+        <g clip-path="url(#inner)">
+          <rect id="beerR" x="30" y="226" width="120" height="0" fill="url(#beerG)"/>
+          <g clip-path="url(#lc)">
+            <circle class="b" cx="54" cy="212" r="2.5" fill="#fff" fill-opacity=".6" style="animation-duration:3.6s;animation-delay:0s"/>
+            <circle class="b" cx="72" cy="216" r="1.6" fill="#fff" fill-opacity=".6" style="animation-duration:4.8s;animation-delay:1.2s"/>
+            <circle class="b" cx="90" cy="210" r="3" fill="#fff" fill-opacity=".6" style="animation-duration:5.4s;animation-delay:.6s"/>
+            <circle class="b" cx="106" cy="217" r="2" fill="#fff" fill-opacity=".6" style="animation-duration:3.9s;animation-delay:2s"/>
+            <circle class="b" cx="122" cy="212" r="2.7" fill="#fff" fill-opacity=".6" style="animation-duration:5s;animation-delay:.3s"/>
+            <circle class="b" cx="132" cy="218" r="1.7" fill="#fff" fill-opacity=".6" style="animation-duration:4.2s;animation-delay:1.7s"/>
+            <circle class="b" cx="64" cy="219" r="2" fill="#fff" fill-opacity=".6" style="animation-duration:5.8s;animation-delay:2.6s"/>
+            <circle class="b" cx="98" cy="219" r="1.5" fill="#fff" fill-opacity=".6" style="animation-duration:4.4s;animation-delay:3s"/>
+          </g>
+        </g>
+
+        <g id="foam" style="display:none"></g>
+
+        <path d="M45 30 L47 208" stroke="#fff" stroke-opacity=".5" stroke-width="6" stroke-linecap="round"/>
+        <path d="M133 34 L131 196" stroke="#fff" stroke-opacity=".3" stroke-width="3" stroke-linecap="round"/>
+        <path d="M28 18 H152 L146 226 Q145 238 133 238 H47 Q35 238 34 226 Z" fill="url(#beerS)"/>
+        <path d="M28 18 L34 226 Q35 238 47 238 H133 Q145 238 146 226 L152 18" fill="none" stroke="var(--ink)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+      </g>
+
+      <!-- garrafa de cerveja inclinada -->
+      <g transform="translate(185,120) rotate(120)">
+        <path d="M-6 2 L-6 38 C-6 54 -21 60 -21 84 L-21 176 Q-21 186 -11 186 H11 Q21 186 21 176 L21 84 C21 60 6 54 6 38 L6 2 Z" fill="url(#bottleG)"/>
+        <g clip-path="url(#bclip)">
+          <g transform="rotate(-120)"><rect id="bottleBeer" x="-300" y="-112" width="600" height="300" fill="#e09212" fill-opacity=".92"/></g>
+        </g>
+        <rect x="-21" y="100" width="42" height="46" fill="#f6e7bd"/>
+        <text x="0" y="122" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" font-weight="800" fill="#b3341c">PUNTA</text>
+        <text x="0" y="139" text-anchor="middle" font-size="12">&#x1F37A;</text>
+        <path d="M-14 50 L-15 96 M-14 150 L-15 174" stroke="#fff" stroke-opacity=".38" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <path d="M-6 2 L-6 38 C-6 54 -21 60 -21 84 L-21 176 Q-21 186 -11 186 H11 Q21 186 21 176 L21 84 C21 60 6 54 6 38 L6 2 Z" fill="none" stroke="#1e0e03" stroke-width="1.6" stroke-linejoin="round"/>
+        <rect x="-8" y="-3" width="16" height="7" rx="3" fill="#5a2c0a" stroke="#1e0e03" stroke-width="1.4"/>
+      </g>
+
+      <!-- fio de cerveja -->
+      <g id="pour">
+        <path id="stream" d="M181.5 126 L181.5 300" fill="none" stroke="#f3a712" stroke-width="5" stroke-linecap="round"/>
+        <path id="streamFlow" class="flow" d="M181.5 126 L181.5 300" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width="1.6"/>
+        <ellipse id="ripple" cx="181.5" cy="300" rx="8" ry="2.2" fill="#fffaf0" fill-opacity=".7"/>
+      </g>
+    </svg>
+  </div>
+  <p class="hint" id="hint">Copo 0% cheio</p>
+
+  <section class="go" aria-live="polite">
+    <div class="big">BORA! 🚗💨</div>
+    <p>Hora de partir para Punta. Saideira e pé na estrada! 🍻</p>
+  </section>
+</main>
+
+<script>
+// Saída: amanhã (17/10/2026) às 9h, no horário do dispositivo
+var target = new Date(2026, 9, 17, 9, 0, 0).getTime();
+// Janela da barra: de hoje 9h até a saída (24h)
+var start = target - 24*60*60*1000;
+
+function pad(n){ return String(n).padStart(2,"0"); }
+
+var MUG_TY = 146, MUG_S = 0.8, STREAM_X = 181.5, STREAM_Y0 = 126;
+function el(id){ return document.getElementById(id); }
+function setLevel(p){
+  var T = 190*p/100;                         // altura total (cerveja + espuma)
+  var extra = Math.max(0, (p-92)/8)*14;      // espuma passa da borda quando está cheio
+  var f = Math.min(0.3*T, 26);               // espuma: no máximo 30% do total, sempre menor que a cerveja
+  var yt = 222 - T - extra, yb = yt + f;
+  var show = T >= 1;
+  var B = el("beerR"), C = el("lcr"), F = el("foam");
+  var hgt = Math.max(0, 226 - yb);
+  B.setAttribute("y", yb); B.setAttribute("height", hgt);
+  C.setAttribute("y", yb); C.setAttribute("height", hgt);
+  B.style.display = show ? "" : "none";
+  F.style.display = show ? "" : "none";
+  if (show) F.innerHTML = foamSVG(yt, yb, f, p);
+  // garrafa esvazia conforme o copo enche
+  var r = 1 - p/100, BL = el("bottleBeer");
+  BL.setAttribute("y", -112*r);
+  BL.style.display = r > 0.005 ? "" : "none";
+  // fio de cerveja da garrafa até a superfície
+  var pouring = p < 100;
+  el("pour").style.display = pouring ? "" : "none";
+  var sy = MUG_TY + MUG_S*(show ? yt : 222);
+  var d = "M"+STREAM_X+" "+STREAM_Y0+" C"+(STREAM_X+0.6)+" "+(STREAM_Y0+14)+" "+(STREAM_X-0.4)+" "+(sy-12)+" "+STREAM_X+" "+sy;
+  el("stream").setAttribute("d", d);
+  el("streamFlow").setAttribute("d", d);
+  el("ripple").setAttribute("cy", sy);
+}
+function xl(y){ return 36 + 0.0258*(y-22); }
+function xr(y){ return 144 - 0.0258*(y-22); }
+function foamSVG(yt, yb, f, p){
+  var ov = p > 92 ? 6*(p-92)/8 : 0;
+  var x1 = xl(yt)-ov, x2 = xr(yt)+ov, x3 = xl(yb), x4 = xr(yb);
+  var c = Math.min(6, f*0.5), bump = Math.min(9, f*0.55), a = Math.min(5, f*0.25);
+  var d = "M"+x3+" "+yb+" L"+x1+" "+(yt+c), i, n = 5, w = (x2-x1)/n;
+  for (i=0;i<n;i++){
+    var xa = x1+w*i, b = bump*(i%2 ? 0.7 : 1);
+    d += " Q"+(xa+w/2)+" "+(yt+c-b*2)+" "+(xa+w)+" "+(yt+c);
+  }
+  d += " L"+x4+" "+yb;
+  var m = 5, w2 = (x4-x3)/m;
+  for (i=0;i<m;i++){
+    var xb = x4-w2*i;
+    d += " Q"+(xb-w2/2)+" "+(yb+a*(i%2 ? 1.2 : 2))+" "+(xb-w2)+" "+yb;
+  }
+  d += " Z";
+  var s = '<path d="'+d+'" fill="#fffaf0" stroke="#e6cd96" stroke-width="1"/>';
+  if (f > 10){
+    [[.2,.4,3],[.42,.7,2],[.62,.35,3.4],[.82,.6,2.4]].forEach(function(q){
+      s += '<circle cx="'+(x1+(x2-x1)*q[0])+'" cy="'+(yt+c+(yb-yt-c)*q[1]*0.7)+'" r="'+q[2]+'" fill="none" stroke="#e6cd96" stroke-width="1.2"/>';
+    });
+  }
+  return s;
+}
+
+function tick(){
+  var now = Date.now();
+  var diff = target - now;
+  if (diff <= 0){
+    document.body.classList.add("done");
+    setLevel(100);
+    document.getElementById("hint").textContent = "Copo cheio! 🍻";
+    document.title = "BORA! Punta 🍺";
+    clearInterval(timer);
+    return;
+  }
+  var s = Math.floor(diff/1000);
+  var d = Math.floor(s/86400);
+  var h = Math.floor((s%86400)/3600);
+  var m = Math.floor((s%3600)/60);
+  document.getElementById("d").textContent = pad(d);
+  document.getElementById("h").textContent = pad(h);
+  document.getElementById("m").textContent = pad(m);
+  document.getElementById("s").textContent = pad(s%60);
+  var pct = Math.min(100, Math.max(0, (now - start)/(target - start)*100));
+  setLevel(pct);
+  document.getElementById("hint").textContent = "Copo " + Math.floor(pct) + "% cheio";
+  document.title = pad(h)+":"+pad(m)+":"+pad(s%60)+" para Punta 🍺";
+}
+var timer = setInterval(tick, 1000);
+tick();
+</script>
+</body>
+</html>
